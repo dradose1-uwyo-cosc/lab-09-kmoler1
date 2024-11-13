@@ -1,12 +1,10 @@
-# Your Name Here
+# Kaleb Moler
 # UWYO COSC 1010
-# Submission Date
-# Lab XX
-# Lab Section:
-# Sources, people worked with, help given to:
-# Your
-# Comments
-# Here
+# 11/13/24
+# Lab 09
+# Lab Section: 15
+# Sources, people worked with, help given to: 
+# Jay Trujio, Jhett Carr
 
 # Classes
 # For this assignment, you will be creating two classes:
@@ -34,7 +32,30 @@
 # - Assign the parameter for size to a size attribute.
 # - Assign the parameter for sauce to the attribute.
 # - Create the toppings attribute, starting off as a list only holding cheese.
-
+class Pizza:
+    def __init__(self,size=10,sauce="red",topping=["cheese"]):
+        try:
+            if(size>=10):
+                self.size=size
+            else:
+                self.size=10
+        except TypeError:
+            self.size=10
+        if(sauce==""):
+            self.sauce="red"
+        else:
+            self.sauce=sauce
+        self.topping=topping
+    def toppings(self):
+        while True:
+            user=input("enter a topping(Leave Blank when done): ")
+            if(user==""):
+                break
+            else:
+                self.topping.append(user)
+        print(self.topping)
+    def amtToppings(self):
+        print(len(self.topping))
 
 # You will be creating a Pizzeria class with the following attributes:
 # - orders, the number of orders placed. Should start at 0.
@@ -69,7 +90,20 @@
 #   - The total price.
 # - getNumberOfOrders()
 #   - This will simply return the number of orders.
-
+class Pizzaria:
+    def __init__(self):
+        self.orders=0
+        self.price_per_inch=.60
+        self.price_per_topping=.30
+    def place_order(self):
+        self.orders+=1
+        size=input("What size do you want your pizza(whole number with the smallest size of 10): ")
+        sause=input("What sause do you want on your pizza(Leave blank for red sause): ")
+        if(sause!=""):
+            new_pizza=Pizza(size,sause)
+        else:
+            new_pizza=Pizza(size) 
+print("done")        
 
 # - Declare your pizzeria object.
 # - Enter a while loop to ask if the user wants to order a pizza.
