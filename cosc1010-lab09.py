@@ -54,7 +54,7 @@ class Pizza:
             else:
                 self.topping.append(user)
         print(self.topping)
-    def amtToppings(self):
+    def amountToppings(self):
         print(len(self.topping))
 
 # You will be creating a Pizzeria class with the following attributes:
@@ -95,6 +95,7 @@ class Pizzaria:
         self.orders=0
         self.price_per_inch=.60
         self.price_per_topping=.30
+        self.pizzas=[]
     def place_order(self):
         self.orders+=1
         size=input("What size do you want your pizza(whole number with the smallest size of 10): ")
@@ -103,6 +104,17 @@ class Pizzaria:
             new_pizza=Pizza(size,sause)
         else:
             new_pizza=Pizza(size) 
+        new_pizza.toppings()
+        self.pizzas.append(new_pizza)
+    def get_price(self,pizza):
+        prices=[]
+        prices.append(self.size * self.price_per_inch)
+        prices.append(pizza.amountToppings() * self.price_per_topping)
+        print(prices)
+user=Pizzaria()
+user.place_order()
+print(user.pizzas[0])
+#user.get_price(pizzas[0])
 print("done")        
 
 # - Declare your pizzeria object.
