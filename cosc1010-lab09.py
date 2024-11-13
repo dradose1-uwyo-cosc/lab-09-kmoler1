@@ -54,8 +54,14 @@ class Pizza:
             else:
                 self.topping.append(user)
         print(self.topping)
+    def get_Size(self):
+        return self.size
+    def get_Sause(self):
+        return self.sause
+    def get_Toppings(self):
+        return self.topping
     def amountToppings(self):
-        print(len(self.topping))
+        return(len(self.topping))
 
 # You will be creating a Pizzeria class with the following attributes:
 # - orders, the number of orders placed. Should start at 0.
@@ -95,7 +101,8 @@ class Pizzaria:
         self.orders=0
         self.price_per_inch=.60
         self.price_per_topping=.30
-        self.pizzas=[]
+        self.pizza=Pizza()
+        self.price=[]
     def place_order(self):
         self.orders+=1
         size=input("What size do you want your pizza(whole number with the smallest size of 10): ")
@@ -105,17 +112,20 @@ class Pizzaria:
         else:
             new_pizza=Pizza(size) 
         new_pizza.toppings()
-        self.pizzas.append(new_pizza)
-    def get_price(self,pizza):
-        prices=[]
-        prices.append(self.size * self.price_per_inch)
-        prices.append(pizza.amountToppings() * self.price_per_topping)
-        print(prices)
-user=Pizzaria()
-user.place_order()
-print(user.pizzas[0])
-#user.get_price(pizzas[0])
-print("done")        
+        self.pizza= new_pizza
+    def get_price(self):
+        self.price=[(self.pizza.size * self.price_per_inch)]
+        self.price.append(self.pizza.amountToppings() * self.price_per_topping)
+    def get_Receipt(self):
+        self.get_price()
+        print(f"You ordered a {self.pizza.size} pizza with {self.pizza.sauce} sauce and the following toppings:")
+        for topping in self.pizza.get_Toppings():
+            print(topping)
+        print(f"Size price: {self.price[0]:.2f}")
+        print(f"Topping price: {self.price[1]:.2f}")
+        print(f"Total price: {(self.price[0]+self.price[1]):.2f}")
+        print(f"Order: {self.orders}")
+    
 
 # - Declare your pizzeria object.
 # - Enter a while loop to ask if the user wants to order a pizza.
@@ -124,8 +134,16 @@ print("done")
 # - After the order is placed, call the getReceipt() method.
 # - Repeat the loop as needed.
 # - AFTER the loop, print how many orders were placed.
-
-
+user=Pizzaria()
+while True:
+    use=input("Would you like to order a pizza(use exit to exit): ").lower()
+    if(use=="exit"):
+        break
+    else:
+        user.place_order()
+        user.get_Receipt()
+        print("\n"*4)   
+print("Thank you")
 # Example output:
 """
 Would you like to place an order? exit to exit
